@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { App } from './Ui/organism/App/App';
+import {Todomain} from '../src/Components/organism/Todomain/Todomain'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Todomain />
   </React.StrictMode>,
   document.getElementById('root')
 );
