@@ -1,0 +1,21 @@
+.add_todo__item {
+  height: 100px;
+  width: 250px;
+  border: 5px black solid;
+  text-align: center;
+}
+
+.add_todo__item h1 {
+  margin-top: 10px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.add_todo__item span {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.done {
+  text-decoration: line-through;
+}
