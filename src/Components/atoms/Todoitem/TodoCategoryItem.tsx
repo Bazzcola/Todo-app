@@ -1,5 +1,5 @@
 import React from 'react';
-import 'Todoitem.css';
+import 'TodoCategoryItem.css';
 
 export const Todoitem = (todo: {
   description: string;
