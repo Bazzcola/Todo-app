@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import dayjs from 'dayjs';
-import 'components/molecules/Todocategory/Todocategory.css';
+import 'components/organism/Todocategory/Todocategory.css';
 
 export const Todocategory = () => {
   const [addtodo, setAddtodo] = useState<string>('');

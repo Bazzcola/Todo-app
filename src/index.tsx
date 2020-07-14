@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'index.css';
-import { Todomain } from 'components/organism/Todomain/Todomain';
+import { Todomain } from 'components/templates/Todomain/Todomain';
 
 ReactDOM.render(
   <React.StrictMode>
