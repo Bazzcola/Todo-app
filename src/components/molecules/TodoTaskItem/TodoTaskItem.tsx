@@ -1,34 +1,34 @@
 import React, { useContext, useCallback } from 'react';
 import { TodoContext } from 'components/context/TodoContext';
-import 'components/molecules/TodoCategoryItem/TodoCategoryItem.css';
+import 'components/molecules/TodoTaskItem/TodoTaskItem.css';
 
-export const TodoCategoryItem = () => {
-  const { newcategory, setNewcategory } = useContext<any>(TodoContext);
+export const TodoTaskItem = () => {
+  const { newtodotask, setNewtodotask } = useContext<any>(TodoContext);
 
-  const removeTodo = useCallback(
+  const removeTodoItem = useCallback(
     (todo) => () => {
-      setNewcategory(
-        newcategory.filter((otherTodo: any) => otherTodo !== todo)
+      setNewtodotask(
+        newtodotask.filter((otherTodo: any) => otherTodo !== todo)
       );
     },
-    [newcategory]
+    [newtodotask]
   );
 
   const doneValue = useCallback(
     (todo, index) => (event: any) => {
-      const newtodos = [...newcategory];
+      const newtodos = [...newtodotask];
       newtodos.splice(index, 1, {
         ...todo,
         done: !todo.done
       });
-      setNewcategory(newtodos);
+      setNewtodotask(newtodos);
     },
-    [newcategory]
+    [newtodotask]
   );
 
   return (
     <>
-      {newcategory.map(
+      {newtodotask.map(
         (
           todo: {
             description: string;
@@ -40,18 +40,18 @@ export const TodoCategoryItem = () => {
           },
           index: number
         ) => (
-          <div className="add_todo__item" key={todo.id}>
+          <div className="add_todo__item_task" key={todo.id}>
             <p className="priority">Priority: {todo.priority}</p>
             <h1 className={todo.done ? 'done' : ''}>{todo.title}</h1>
             <input
               className="checkbox"
               type="checkbox"
-              checked={newcategory.done}
+              checked={newtodotask.done}
               onChange={doneValue(todo, index)}
             />
             <h2 className={todo.done ? 'done' : ''}>{todo.description}</h2>
             <span className="create_time">{todo.date}</span>
-            <button onClick={removeTodo(todo)} className="delete_btn">
+            <button onClick={removeTodoItem(todo)} className="delete_btn">
               Delete
             </button>
           </div>
