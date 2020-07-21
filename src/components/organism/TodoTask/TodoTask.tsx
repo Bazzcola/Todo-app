@@ -45,7 +45,7 @@ export const TodoTask = () => {
       <button className="add_todo__task" onClick={hideBox}>
         <p>+</p>
       </button>
-      <TodoTaskItem />
+      {/* <TodoTaskItem /> */}
     </div>
   );
 };

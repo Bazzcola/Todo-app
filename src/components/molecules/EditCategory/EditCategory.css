@@ -1,0 +1,81 @@
+.form_box_edit__cat {
+  z-index: 3;
+  position: absolute;
+  top: 300px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 500px;
+  height: 250px;
+  background-color: azure;
+  text-align: center;
+  padding-top: 15px;
+}
+
+.form_box_edit__cat span {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 23px;
+  height: 19px;
+  border-radius: 50%;
+  background-color: rgb(219, 220, 217);
+}
+
+.btn_add {
+  width: 100px;
+  height: 30px;
+  background: white;
+  font-size: 18px;
+  border-radius: 12px;
+  outline: none;
+  box-sizing: border-box;
+  transition: 0.3s ease;
+  cursor: pointer;
+  border: 3px black solid;
+}
+
+.add_form {
+  width: 100%;
+  text-align: center;
+}
+
+input[type='text']:focus {
+  border: 3px solid rgb(109, 174, 212);
+}
+
+.add_form input {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  outline: none;
+  width: 300px;
+  height: 30px;
+  padding-left: 10px;
+  font-size: 18px;
+  border-radius: 12px;
+  box-sizing: border-box;
+  border: 3px black solid;
+}
+
+.priority {
+  display: block;
+  width: 200px;
+  margin: 0 auto;
+  font-size: 18px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.priority_select {
+  width: 120px;
+  height: 30px;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.btn_add:hover {
+  color: rgb(109, 174, 212);
+}

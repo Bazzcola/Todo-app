@@ -5,6 +5,7 @@ import { TodoContext } from 'components/context/TodoContext';
 import { AddCategoryWindow } from 'components/molecules/AddCategoryWindow/AddCategoryWindow';
 import { AddTodoTaskWindow } from 'components/molecules/AddTodoTaskWindow/AddTodoTaskWindow';
 import 'components/templates/Todomain/Todomain.css';
+import { EditCategory } from 'components/molecules/EditCategory/EditCategory';
 
 export const Todomain = () => {
   const [newcategory, setNewcategory] = useState<any>([]);
@@ -42,6 +43,7 @@ export const Todomain = () => {
         <Todocategory />
         <TodoTask />
         <AddTodoTaskWindow />
+        <EditCategory />
       </div>
     </TodoContext.Provider>
   );

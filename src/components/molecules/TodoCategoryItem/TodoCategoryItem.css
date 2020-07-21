@@ -48,3 +48,21 @@
   letter-spacing: 1px;
   cursor: pointer;
 }
+
+.edit_todo__cat {
+  background: rgb(223, 243, 186);
+  font-size: 12px;
+  font-weight: 700;
+  width: 100px;
+  color: rgb(4, 0, 255);
+  letter-spacing: 1px;
+  cursor: pointer;
+  margin: 0px 5px 0px 5px;
+}
+
+.item_box {
+  position: absolute;
+  display: flex;
+  top: 80px;
+  left: 300px;
+}

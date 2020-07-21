@@ -1,6 +1,7 @@
 import React, { useContext, useCallback } from 'react';
 import { TodoContext } from 'components/context/TodoContext';
 import 'components/molecules/TodoCategoryItem/TodoCategoryItem.css';
+import { TodoTaskItem } from '../TodoTaskItem/TodoTaskItem';
 
 export const TodoCategoryItem = () => {
   const { newcategory, setNewcategory } = useContext<any>(TodoContext);
@@ -25,6 +26,13 @@ export const TodoCategoryItem = () => {
     },
     [newcategory]
   );
+
+  const edithideBox = () => {
+    let x: any = document.getElementById('edit');
+    x.style.display === 'none'
+      ? (x.style.display = 'block')
+      : (x.style.display = 'none');
+  };
 
   return (
     <>
@@ -51,12 +59,18 @@ export const TodoCategoryItem = () => {
             />
             <h2 className={todo.done ? 'done' : ''}>{todo.description}</h2>
             <span className="create_time">{todo.date}</span>
+            <button className="edit_todo__cat" onClick={edithideBox}>
+              Edit
+            </button>
             <button onClick={removeTodo(todo)} className="delete_btn">
               Delete
             </button>
           </div>
         )
       )}
+      <div className="item_box">
+        <TodoTaskItem />
+      </div>
     </>
   );
 };
