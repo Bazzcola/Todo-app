@@ -59,10 +59,3 @@
   cursor: pointer;
   margin: 0px 5px 0px 5px;
 }
-
-.item_box {
-  position: absolute;
-  display: flex;
-  top: 80px;
-  left: 300px;
-}

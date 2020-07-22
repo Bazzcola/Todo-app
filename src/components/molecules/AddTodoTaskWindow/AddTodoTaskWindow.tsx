@@ -1,10 +1,11 @@
-import React, { useContext, useCallback } from 'react';
+import React, { useContext, useCallback, useState } from 'react';
 import { TodoContext } from 'components/context/TodoContext';
 import dayjs from 'dayjs';
 import 'components/molecules/AddTodoTaskWindow/AddTodoTaskWindow.css';
 
 export const AddTodoTaskWindow = () => {
   const {
+    newcategory,
     newtodotask,
     setNewtodotask,
     descriptionTodo,
@@ -14,7 +15,7 @@ export const AddTodoTaskWindow = () => {
     addtodoTitle,
     setAddtodoTitle
   } = useContext<any>(TodoContext);
-
+  const [addCat, setAddCat] = useState<any>('');
   const currentTime = () => {
     let today = new Date();
     let dateTime = dayjs(today).format('MMM D, YYYY h:mm A');
@@ -34,7 +35,8 @@ export const AddTodoTaskWindow = () => {
           description: descriptionTodo,
           done: false,
           priority: valueTodo,
-          date: currentTime()
+          date: currentTime(),
+          categories: addCat
         }
       ]);
       setAddtodoTitle('');
@@ -63,6 +65,12 @@ export const AddTodoTaskWindow = () => {
     },
     [valueTodo]
   );
+  const addCategory = useCallback(
+    (event: any) => {
+      setAddCat(event.target.value);
+    },
+    [addCat]
+  );
 
   const hideBox = () => {
     let x: any = document.getElementById('form_hide2');
@@ -82,6 +90,11 @@ export const AddTodoTaskWindow = () => {
           <option value="low">low</option>
           <option value="medium">medium</option>
           <option value="high">high</option>
+        </select>
+        <select onChange={addCategory} className="priority_select">
+          {newcategory.map((todo: { title: string }) => (
+            <option value={todo.title}>{todo.title}</option>
+          ))}
         </select>
         <br />
         <input

@@ -7,7 +7,7 @@
   text-align: center;
   word-wrap: break-word;
   padding: 5px;
-  margin: 0px 15px 30px 15px;
+  margin: 0px 15px 30px 50px;
 }
 
 .add_todo__item h1 {
@@ -65,4 +65,38 @@
 .create_time {
   display: block;
   margin-bottom: 10px;
+}
+
+.add_todo__task {
+  position: absolute;
+  top: 10px;
+  left: 50px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 5px black solid;
+  font-size: 42px;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+  background-color: rgb(135, 222, 196);
+  text-align: center;
+}
+
+.add_todo__task p {
+  margin: 0px;
+  color: white;
+}
+
+.item_box {
+  position: absolute;
+  display: flex;
+  top: 0px;
+  left: 300px;
+}
+
+.todo_list__box {
+  padding-top: 80px;
+  display: flex;
+  flex-wrap: wrap;
 }

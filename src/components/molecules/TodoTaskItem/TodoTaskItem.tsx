@@ -4,7 +4,8 @@ import 'components/molecules/TodoTaskItem/TodoTaskItem.css';
 
 export const TodoTaskItem = () => {
   const { newtodotask, setNewtodotask } = useContext<any>(TodoContext);
-
+  const { newfiltertodotask } = useContext<any>(TodoContext);
+  const { filteredCategory } = useContext<any>(TodoContext);
   const removeTodoItem = useCallback(
     (todo) => () => {
       setNewtodotask(
@@ -33,10 +34,14 @@ export const TodoTaskItem = () => {
       x.style.display = 'none';
     }
   };
+
   return (
     <>
       <div className="todo_list__box">
-        {newtodotask.map(
+        <button className="add_todo__task" onClick={hideBox}>
+          <p>+</p>
+        </button>
+        {(filteredCategory ? newfiltertodotask : newtodotask).map(
           (
             todo: {
               description: string;
@@ -45,10 +50,12 @@ export const TodoTaskItem = () => {
               done: boolean;
               priority: string;
               date: string;
+              categories: string;
             },
             index: number
           ) => (
             <div className="add_todo__item_task" key={todo.id}>
+              <p>{todo.categories}</p>
               <p className="priority">Priority: {todo.priority}</p>
               <h1 className={todo.done ? 'done' : ''}>{todo.title}</h1>
               <input

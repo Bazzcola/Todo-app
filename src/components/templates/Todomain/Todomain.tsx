@@ -13,13 +13,16 @@ export const Todomain = () => {
   const [value, setValue] = useState<string>('none');
   const [addtodo, setAddtodo] = useState<string>('');
   const [newtodotask, setNewtodotask] = useState<any>([]);
+  const [newfiltertodotask, setNewfiltertodotask] = useState<any>([]);
   const [descriptionTodo, setDescriptionTodo] = useState<string>('');
   const [valueTodo, setValueTodo] = useState<string>('none');
   const [addtodoTitle, setAddtodoTitle] = useState<string>('');
-
+  const [filteredCategory, setFilteredCategory] = useState<string>('');
   return (
     <TodoContext.Provider
       value={{
+        filteredCategory,
+        setFilteredCategory,
         newcategory,
         setNewcategory,
         description,
@@ -30,6 +33,8 @@ export const Todomain = () => {
         setAddtodo,
         newtodotask,
         setNewtodotask,
+        newfiltertodotask,
+        setNewfiltertodotask,
         descriptionTodo,
         setDescriptionTodo,
         valueTodo,
@@ -41,7 +46,7 @@ export const Todomain = () => {
       <div className="container">
         <AddCategoryWindow />
         <Todocategory />
-        <TodoTask />
+        {/* <TodoTask /> */}
         <AddTodoTaskWindow />
         <EditCategory />
       </div>
