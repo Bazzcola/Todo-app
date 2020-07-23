@@ -26,8 +26,22 @@ export const AddTodoTaskWindow = () => {
   const addTodoItem = useCallback(
     (event) => {
       event.preventDefault();
-      if (!descriptionTodo.trim() || !addtodoTitle.trim() || !addCat.trim())
+      if (!descriptionTodo.trim() || !addtodoTitle.trim() || !addCat.trim()) {
+        let warning: HTMLElement | null | any = document.getElementById(
+          'warning2'
+        );
+        if (warning && warning.style.display === 'none') {
+          warning.style.display = 'block';
+        }
         return;
+      } else {
+        let warning: HTMLElement | null | any = document.getElementById(
+          'warning2'
+        );
+        if (warning.style.display === 'block' && descriptionTodo) {
+          warning.style.display = 'none';
+        }
+      }
 
       setNewtodotask([
         ...newtodotask,
@@ -86,6 +100,9 @@ export const AddTodoTaskWindow = () => {
     <div className="form_box_todo" id="form_hide2" style={{ display: 'none' }}>
       <span onClick={hideBox}>X</span>
       <form onSubmit={addTodoItem} className="add_form">
+        <p id="warning2" style={{ display: 'none' }}>
+          Fill all fields
+        </p>
         <h3>Priority level:</h3>
         <select onChange={addValue} className="priority_select">
           <option value="none">none</option>

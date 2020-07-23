@@ -24,7 +24,22 @@ export const AddCategoryWindow = () => {
   const addCategory = useCallback(
     (event) => {
       event.preventDefault();
-      if (!description.trim() || !addtodo.trim()) return;
+      if (!description.trim() || !addtodo.trim()) {
+        let warning: HTMLElement | null | any = document.getElementById(
+          'warning'
+        );
+        if (warning && warning.style.display === 'none') {
+          warning.style.display = 'block';
+        }
+        return;
+      } else {
+        let warning: HTMLElement | null | any = document.getElementById(
+          'warning'
+        );
+        if (warning.style.display === 'block' && description) {
+          warning.style.display = 'none';
+        }
+      }
 
       setNewcategory([
         ...newcategory,
@@ -77,6 +92,9 @@ export const AddCategoryWindow = () => {
     <div className="form_box" id="form_hide" style={{ display: 'none' }}>
       <span onClick={hideBox}>X</span>
       <form onSubmit={addCategory} className="add_form">
+        <p id="warning" style={{ display: 'none' }}>
+          Fill all fields
+        </p>
         <h3>Priority level:</h3>
         <select onChange={addValue} className="priority_select">
           <option value="none">none</option>
