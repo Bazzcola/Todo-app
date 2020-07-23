@@ -14,7 +14,7 @@ export const TodoTask = () => {
       x.style.display = 'none';
     }
   };
-  // { none: number, low: number, medium: number, high: number }
+
   const priorities: any = {
     none: 0,
     low: 1,
@@ -25,6 +25,7 @@ export const TodoTask = () => {
   const sortedTodosTask = newtodotask.sort((a: any, b: any) => {
     return priorities[b.priority] - priorities[a.priority];
   });
+
   useEffect(() => {
     setNewtodotask(sortedTodosTask);
   }, [sortedTodosTask]);

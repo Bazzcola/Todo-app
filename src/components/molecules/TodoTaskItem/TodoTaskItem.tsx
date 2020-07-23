@@ -9,25 +9,27 @@ export const TodoTaskItem = () => {
 
   const removeTodoItem = useCallback(
     (todo) => () => {
-      setNewtodotask(
-        newtodotask.filter((otherTodo: any) => otherTodo !== todo)
+      setNewtodotask((prevNewTodos: any) =>
+        prevNewTodos.filter((otherTodo: any) => otherTodo !== todo)
       );
     },
-    [newtodotask]
+    []
   );
 
   const doneValue = useCallback(
-    (todo, index) => (event: any) => {
-      const newtodos = JSON.parse(JSON.stringify(newtodotask));
-      newtodos[index].done = !newtodos[index].done;
-      setNewtodotask(newtodos);
-      console.log(newtodos);
+    (id: number) => () => {
+      setNewtodotask((prevNewTodos: any) =>
+        prevNewTodos.map((todo: any) => ({
+          ...todo,
+          done: todo.id === id ? !todo.done : todo.done
+        }))
+      );
     },
-    [newtodotask]
+    []
   );
   const hideBox = () => {
     let x: any = document.getElementById('form_hide2');
-    if (x?.style.display === 'none') {
+    if (x && x.style.display === 'none') {
       x.style.display = 'block';
     } else {
       x.style.display = 'none';
@@ -40,35 +42,38 @@ export const TodoTaskItem = () => {
         <button className="add_todo__task" onClick={hideBox}>
           <p>+</p>
         </button>
+
         {(filteredCategory ? newfiltertodotask : newtodotask).map(
-          (
-            todo: {
-              description: string;
-              id: number;
-              title: string;
-              done: boolean;
-              priority: string;
-              date: string;
-              categories: string;
-            },
-            index: number
-          ) => (
+          (todo: {
+            description: string;
+            id: number;
+            title: string;
+            done: boolean;
+            priority: string;
+            date: string;
+            categories: string;
+          }) => (
             <div className="add_todo__item_task" key={todo.id}>
               <p>{todo.categories}</p>
               <p className="priority">Priority: {todo.priority}</p>
               <h1 className={todo.done ? 'done' : ''}>{todo.title}</h1>
+
               <input
                 className="checkbox"
                 type="checkbox"
-                checked={newtodotask.done}
-                onChange={doneValue(todo, index)}
+                checked={todo.done}
+                onChange={doneValue(todo.id)}
               />
+
               <h2 className={todo.done ? 'done' : ''}>{todo.description}</h2>
               <span className="create_time">{todo.date}</span>
+
               <br />
+
               <button className="edit_todo__task" onClick={hideBox}>
                 Edit
               </button>
+
               <button onClick={removeTodoItem(todo)} className="delete_btn">
                 Delete
               </button>
