@@ -6,6 +6,7 @@ export const TodoTaskItem = () => {
   const { newtodotask, setNewtodotask } = useContext<any>(TodoContext);
   const { newfiltertodotask } = useContext<any>(TodoContext);
   const { filteredCategory } = useContext<any>(TodoContext);
+
   const removeTodoItem = useCallback(
     (todo) => () => {
       setNewtodotask(
@@ -17,12 +18,10 @@ export const TodoTaskItem = () => {
 
   const doneValue = useCallback(
     (todo, index) => (event: any) => {
-      const newtodos = [...newtodotask];
-      newtodos.splice(index, 1, {
-        ...todo,
-        done: !todo.done
-      });
+      const newtodos = JSON.parse(JSON.stringify(newtodotask));
+      newtodos[index].done = !newtodos[index].done;
       setNewtodotask(newtodos);
+      console.log(newtodos);
     },
     [newtodotask]
   );

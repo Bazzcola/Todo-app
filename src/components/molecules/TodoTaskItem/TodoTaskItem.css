@@ -100,3 +100,12 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+div[id='cb'] {
+  text-decoration: none;
+}
+
+input[id='cb']:checked ~ h1.del {
+  text-decoration: line-through;
+  color: red;
+}

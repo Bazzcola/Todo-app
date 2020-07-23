@@ -16,6 +16,7 @@ export const AddTodoTaskWindow = () => {
     setAddtodoTitle
   } = useContext<any>(TodoContext);
   const [addCat, setAddCat] = useState<any>('');
+
   const currentTime = () => {
     let today = new Date();
     let dateTime = dayjs(today).format('MMM D, YYYY h:mm A');
@@ -25,7 +26,8 @@ export const AddTodoTaskWindow = () => {
   const addTodoItem = useCallback(
     (event) => {
       event.preventDefault();
-      if (!descriptionTodo.trim() || !addtodoTitle.trim()) return;
+      if (!descriptionTodo.trim() || !addtodoTitle.trim() || !addCat.trim())
+        return;
 
       setNewtodotask([
         ...newtodotask,
@@ -42,7 +44,7 @@ export const AddTodoTaskWindow = () => {
       setAddtodoTitle('');
       setDescriptionTodo('');
     },
-    [addtodoTitle, descriptionTodo, newtodotask, valueTodo]
+    [addtodoTitle, descriptionTodo, newtodotask, valueTodo, addCat]
   );
 
   const setTodo = useCallback(
@@ -92,8 +94,12 @@ export const AddTodoTaskWindow = () => {
           <option value="high">high</option>
         </select>
         <select onChange={addCategory} className="priority_select">
-          {newcategory.map((todo: { title: string }) => (
-            <option value={todo.title}>{todo.title}</option>
+          {newcategory.map((todo: { title: string; id: number }) => (
+            <>
+              <option value={todo.title} key={todo.id}>
+                {todo.title}
+              </option>
+            </>
           ))}
         </select>
         <br />
