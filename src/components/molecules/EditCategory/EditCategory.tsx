@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState, FormEvent } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { TodoContext } from 'components/context/TodoContext';
 import dayjs from 'dayjs';
 import 'components/molecules/EditCategory/EditCategory.css';
@@ -8,32 +8,36 @@ export const EditCategory = () => {
   const [editTodo, setEditTodo] = useState<any>([]);
   const [editDescription, setEditDescription] = useState<any>([]);
   const [editCatValue, setEditCatValue] = useState<any>([]);
+  const { saveId } = useContext(TodoContext);
 
   const editTime = () => {
     let today = new Date();
     let dateTime = dayjs(today).format('MMM D, YYYY h:mm A');
     return dateTime;
   };
-  const EditCategory = (newcategory: any) => (event: any) => {
-    event.preventDefault();
-    console.log(newcategory.id);
-  };
-  // const EditCategory = useCallback(
-  //   (newcategory: any, index: any) => (event: FormEvent<HTMLFormElement>) => {
-  //     const editCat = [...newcategory];
-  //     editCat.splice(index, 1, {
-  //       ...newcategory,
-  //       id: Math.round(Math.random() * 10000),
-  //       title: editTodo,
-  //       description: editDescription,
-  //       done: false,
-  //       priority: editCatValue,
-  //       date: editTime()
-  //     });
-  //     setNewcategory(editCat);
-  //   },
-  //   [newcategory, editTodo, editDescription, editTime, editCatValue]
-  // );
+
+  const EditCategory = useCallback(
+    () => (e: any) => {
+      e.preventDefault();
+      setNewcategory((prevNewTodos: any) =>
+        prevNewTodos.map((todo: any) =>
+          todo.id === saveId
+            ? {
+                id: Math.round(Math.random() * 10000),
+                title: editTodo,
+                description: editDescription,
+                done: false,
+                priority: editCatValue,
+                date: editTime()
+              }
+            : todo
+        )
+      );
+      setEditTodo('');
+      setEditDescription('');
+    },
+    [newcategory, editTodo, editDescription, editTime, editCatValue]
+  );
 
   const setTodo = useCallback(
     (event) => {
@@ -66,7 +70,7 @@ export const EditCategory = () => {
   return (
     <div className="form_box_edit__cat" id="edit" style={{ display: 'none' }}>
       <span onClick={hideBox}>X</span>
-      <form onSubmit={EditCategory} className="add_form">
+      <form onSubmit={EditCategory()} className="add_form">
         <h3>Priority level:</h3>
         <select onChange={editValue} className="priority_select">
           <option value="none">none</option>

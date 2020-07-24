@@ -10,6 +10,8 @@ export const TodoCategoryItem = () => {
   const { filteredCategory, setFilteredCategory } = useContext<any>(
     TodoContext
   );
+  const { setSaveId } = useContext<any>(TodoContext);
+
   const removeTodo = useCallback(
     (todo) => () => {
       setNewcategory(
@@ -31,7 +33,8 @@ export const TodoCategoryItem = () => {
     [newcategory]
   );
 
-  const edithideBox = () => {
+  const edithideBox = (id: number) => {
+    setSaveId(id);
     let x: any = document.getElementById('edit');
     x.style.display === 'none'
       ? (x.style.display = 'block')
@@ -61,7 +64,7 @@ export const TodoCategoryItem = () => {
   useEffect(() => {
     localStorage.setItem('list_todo', JSON.stringify(sortedTodosTask));
   });
-  ////////
+
   useEffect(() => {
     const x = newtodotask.filter(
       (elem: any) => elem.categories === filteredCategory
@@ -71,10 +74,8 @@ export const TodoCategoryItem = () => {
 
   const clickCat = (title: any) => (event: any) => {
     setFilteredCategory(title);
-
-    // const x = todoArray.filter((elem: any) => elem.categories === title);
   };
-  ///////
+
   return (
     <>
       {newcategory.map(
@@ -105,7 +106,10 @@ export const TodoCategoryItem = () => {
               />
               <h2 className={todo.done ? 'done' : ''}>{todo.description}</h2>
               <span className="create_time">{todo.date}</span>
-              <button className="edit_todo__cat" onClick={edithideBox}>
+              <button
+                className="edit_todo__cat"
+                onClick={() => edithideBox(todo.id)}
+              >
                 Edit
               </button>
               <button onClick={removeTodo(todo)} className="delete_btn">
