@@ -21,9 +21,13 @@ export const Todomain = () => {
   const [filteredCategory, setFilteredCategory] = useState<string>('');
   const [saveId, setSaveId] = useState<number>();
   const [saveIdTodo, setSaveIdTodo] = useState<number>();
+  const [saveTodoName, setSaveTodoName] = useState<string>('');
+
   return (
     <TodoContext.Provider
       value={{
+        saveTodoName,
+        setSaveTodoName,
         saveIdTodo,
         setSaveIdTodo,
         saveId,

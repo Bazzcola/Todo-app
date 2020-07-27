@@ -10,24 +10,31 @@
   margin: 0px 15px 30px 50px;
 }
 
-.add_todo__item h1 {
-  margin-top: 10px;
+.add_todo__item_task h1 {
   font-size: 22px;
   font-weight: 700;
+  margin-top: 20px;
 }
 
-.add_todo__item h2 {
+.add_todo__item_task h2 {
   margin: 0;
   font-size: 22px;
   font-weight: 500;
+  margin-bottom: 10px;
 }
 
-.add_todo__item span {
+.add_todo__item_task span {
   display: block;
   margin-top: 5px;
   margin-bottom: 4px;
   font-size: 12px;
   font-weight: 500;
+}
+
+.categoriesName {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 15px 0px 15px 0px;
 }
 
 .done {
@@ -108,4 +115,13 @@ div[id='cb'] {
 input[id='cb']:checked ~ h1.del {
   text-decoration: line-through;
   color: red;
+}
+
+.priorityTodo {
+  display: block;
+  width: 200px;
+  margin: 0 auto;
+  font-size: 18px;
+  font-size: 16px;
+  font-weight: 700;
 }

@@ -90,7 +90,7 @@ export const TodoCategoryItem = () => {
           },
           index: number
         ) => (
-          <>
+          <div key={todo.id}>
             <div
               className="add_todo__item"
               key={todo.id}
@@ -116,14 +116,10 @@ export const TodoCategoryItem = () => {
                 Delete
               </button>
             </div>
-            <div
-              className={`item_box ${todo.title}`}
-              id={`${todo.title}`}
-              // style={{ display: 'none' }}
-            >
+            <div className={`item_box ${todo.title}`} id={`${todo.title}`}>
               <TodoTaskItem />
             </div>
-          </>
+          </div>
         )
       )}
     </>

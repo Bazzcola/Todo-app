@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useState } from 'react';
 import { TodoContext } from 'components/context/TodoContext';
 import dayjs from 'dayjs';
-import 'components/molecules/EditCategory/EditCategory.css';
+import 'components/molecules/EditTodo/EditTodo.css';
 
 export const EditTodo = () => {
   const { newtodotask, setNewtodotask } = useContext<any>(TodoContext);
@@ -9,6 +9,7 @@ export const EditTodo = () => {
   const [editDescriptionTodo, setEditDescriptionTodo] = useState<any>([]);
   const [editTodoValue, setEditTodoValue] = useState<any>([]);
   const { saveIdTodo } = useContext(TodoContext);
+  const { saveTodoName } = useContext<any>(TodoContext);
 
   const editTime = () => {
     let today = new Date();
@@ -19,6 +20,7 @@ export const EditTodo = () => {
   const EditTodo = useCallback(
     () => (e: any) => {
       e.preventDefault();
+      console.log(saveIdTodo);
       setNewtodotask((prevNewTodos: any) =>
         prevNewTodos.map((todo: any) =>
           todo.id === saveIdTodo
@@ -28,7 +30,8 @@ export const EditTodo = () => {
                 description: editDescriptionTodo,
                 done: false,
                 priority: editTodoValue,
-                date: editTime()
+                date: editTime(),
+                categories: saveTodoName
               }
             : todo
         )
@@ -61,14 +64,18 @@ export const EditTodo = () => {
   );
 
   const hideBox = () => {
-    let x: any = document.getElementById('edit');
+    let x: any = document.getElementById('edit13');
     x.style.display === 'none'
       ? (x.style.display = 'block')
       : (x.style.display = 'none');
   };
 
   return (
-    <div className="form_box_edit__cat" id="edit" style={{ display: 'none' }}>
+    <div
+      className="form_box_edit__todo"
+      id="edit13"
+      style={{ display: 'none' }}
+    >
       <span onClick={hideBox}>X</span>
       <form onSubmit={EditTodo()} className="add_form">
         <h3>Priority level:</h3>

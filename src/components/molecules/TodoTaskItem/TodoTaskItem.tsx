@@ -7,6 +7,7 @@ export const TodoTaskItem = () => {
   const { newfiltertodotask } = useContext<any>(TodoContext);
   const { filteredCategory } = useContext<any>(TodoContext);
   const { setSaveIdTodo } = useContext<any>(TodoContext);
+  const { setSaveTodoName } = useContext<any>(TodoContext);
   const removeTodoItem = useCallback(
     (todo) => () => {
       setNewtodotask((prevNewTodos: any) =>
@@ -28,9 +29,10 @@ export const TodoTaskItem = () => {
     []
   );
 
-  const hideBox = (id: number) => {
+  const hideBox = (id: number, categories: string) => {
+    setSaveTodoName(categories);
     setSaveIdTodo(id);
-    let x: any = document.getElementById('form_hide2');
+    let x: any = document.getElementById('edit13');
     if (x && x.style.display === 'none') {
       x.style.display = 'block';
     } else {
@@ -64,8 +66,8 @@ export const TodoTaskItem = () => {
             categories: string;
           }) => (
             <div className="add_todo__item_task" key={todo.id}>
-              <p>{todo.categories}</p>
-              <p className="priority">Priority: {todo.priority}</p>
+              <p className="categoriesName">Category: {todo.categories}</p>
+              <p className="priorityTodo">Priority: {todo.priority}</p>
               <h1 className={todo.done ? 'done' : ''}>{todo.title}</h1>
 
               <input
@@ -82,7 +84,7 @@ export const TodoTaskItem = () => {
 
               <button
                 className="edit_todo__task"
-                onClick={() => hideBox(todo.id)}
+                onClick={() => hideBox(todo.id, todo.categories)}
               >
                 Edit
               </button>
