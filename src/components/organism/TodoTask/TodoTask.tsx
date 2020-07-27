@@ -1,10 +1,12 @@
 import React, { useEffect, useContext } from 'react';
 import { TodoContext } from 'components/context/TodoContext';
 import { TodoTaskItem } from 'components/molecules/TodoTaskItem/TodoTaskItem';
+import { AddTodoTaskWindow } from 'components/molecules/AddTodoTaskWindow/AddTodoTaskWindow';
+import { EditTodo } from 'components/molecules/EditTodo/EditTodo';
 import 'components/organism/TodoTask/TodoTask.css';
 
 export const TodoTask = () => {
-  const { newtodotask, setNewtodotask } = useContext<any>(TodoContext);
+  const { newtodotask, setNewtodotask } = useContext(TodoContext);
 
   const hideBox = () => {
     let x: any = document.getElementById('form_hide2');
@@ -30,29 +32,14 @@ export const TodoTask = () => {
     setNewtodotask(sortedTodosTask);
   }, [sortedTodosTask]);
 
-  useEffect(() => {
-    const data = localStorage.getItem('list_todo');
-    if (data) {
-      setNewtodotask(JSON.parse(data));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('list_todo', JSON.stringify(sortedTodosTask));
-  });
-
   return (
-    <>
-      //{' '}
-      <div className="todo_list__box">
-        //{' '}
-        <button className="add_todo__task" onClick={hideBox}>
-          // <p>+</p>
-          //{' '}
-        </button>
-        // {/* <TodoTaskItem /> */}
-        //{' '}
-      </div>
-    </>
+    <div className="todo_list__box">
+      <button className="add_todo__task" onClick={hideBox}>
+        <p>+</p>
+      </button>
+      <TodoTaskItem />
+      <AddTodoTaskWindow />
+      <EditTodo />
+    </div>
   );
 };

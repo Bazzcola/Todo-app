@@ -1,6 +1,6 @@
 import React, { useContext, useCallback, useState } from 'react';
-import { TodoContext } from 'components/context/TodoContext';
 import dayjs from 'dayjs';
+import { TodoContext } from 'components/context/TodoContext';
 import 'components/molecules/AddTodoTaskWindow/AddTodoTaskWindow.css';
 
 export const AddTodoTaskWindow = () => {
@@ -14,9 +14,9 @@ export const AddTodoTaskWindow = () => {
     setValueTodo,
     addtodoTitle,
     setAddtodoTitle
-  } = useContext<any>(TodoContext);
+  } = useContext(TodoContext);
 
-  const [addCat, setAddCat] = useState<any>('none');
+  const [addCat, setAddCat] = useState('none');
 
   const currentTime = () => {
     let today = new Date();

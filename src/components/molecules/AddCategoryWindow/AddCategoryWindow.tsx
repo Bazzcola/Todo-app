@@ -1,6 +1,6 @@
 import React, { useCallback, useContext } from 'react';
-import { TodoContext } from 'components/context/TodoContext';
 import dayjs from 'dayjs';
+import { TodoContext } from 'components/context/TodoContext';
 import 'components/molecules/AddCategoryWindow/AddCategoryWindow.css';
 
 export const AddCategoryWindow = () => {
@@ -13,7 +13,7 @@ export const AddCategoryWindow = () => {
     setValue,
     addtodo,
     setAddtodo
-  } = useContext<any>(TodoContext);
+  } = useContext(TodoContext);
 
   const currentTime = () => {
     let today = new Date();

@@ -1,16 +1,13 @@
 import React, { useContext, useCallback, useEffect } from 'react';
 import { TodoContext } from 'components/context/TodoContext';
 import 'components/molecules/TodoCategoryItem/TodoCategoryItem.css';
-import { TodoTaskItem } from '../TodoTaskItem/TodoTaskItem';
 
 export const TodoCategoryItem = () => {
-  const { newcategory, setNewcategory } = useContext<any>(TodoContext);
-  const { newtodotask, setNewtodotask } = useContext<any>(TodoContext);
-  const { setNewfiltertodotask } = useContext<any>(TodoContext);
-  const { filteredCategory, setFilteredCategory } = useContext<any>(
-    TodoContext
-  );
-  const { setSaveId } = useContext<any>(TodoContext);
+  const { newcategory, setNewcategory } = useContext(TodoContext);
+  const { newtodotask, setNewtodotask } = useContext(TodoContext);
+  const { setNewfiltertodotask } = useContext(TodoContext);
+  const { filteredCategory, setFilteredCategory } = useContext(TodoContext);
+  const { setSaveId } = useContext(TodoContext);
 
   const removeTodo = useCallback(
     (todo) => () => {
@@ -22,7 +19,7 @@ export const TodoCategoryItem = () => {
   );
 
   const doneValue = useCallback(
-    (todo, index) => (event: any) => {
+    (todo, index) => () => {
       const newtodos = [...newcategory];
       newtodos.splice(index, 1, {
         ...todo,
@@ -55,24 +52,13 @@ export const TodoCategoryItem = () => {
   }, [sortedTodosTask]);
 
   useEffect(() => {
-    const data = localStorage.getItem('list_todo');
-    if (data) {
-      setNewtodotask(JSON.parse(data));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('list_todo', JSON.stringify(sortedTodosTask));
-  });
-
-  useEffect(() => {
     const x = newtodotask.filter(
       (elem: any) => elem.categories === filteredCategory
     );
     setNewfiltertodotask(x);
   }, [filteredCategory, newtodotask]);
 
-  const clickCat = (title: any) => (event: any) => {
+  const clickCat = (title: any) => () => {
     setFilteredCategory(title);
   };
 
@@ -101,7 +87,7 @@ export const TodoCategoryItem = () => {
               <input
                 className="checkbox"
                 type="checkbox"
-                checked={newcategory.done}
+                checked={todo.done}
                 onChange={doneValue(todo, index)}
               />
               <h2 className={todo.done ? 'done' : ''}>{todo.description}</h2>
@@ -115,9 +101,6 @@ export const TodoCategoryItem = () => {
               <button onClick={removeTodo(todo)} className="delete_btn">
                 Delete
               </button>
-            </div>
-            <div className={`item_box ${todo.title}`} id={`${todo.title}`}>
-              <TodoTaskItem />
             </div>
           </div>
         )

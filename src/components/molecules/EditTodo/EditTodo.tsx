@@ -1,15 +1,15 @@
 import React, { useCallback, useContext, useState } from 'react';
-import { TodoContext } from 'components/context/TodoContext';
 import dayjs from 'dayjs';
+import { TodoContext } from 'components/context/TodoContext';
 import 'components/molecules/EditTodo/EditTodo.css';
 
 export const EditTodo = () => {
-  const { newtodotask, setNewtodotask } = useContext<any>(TodoContext);
-  const [editTodoTask, setEditTodoTask] = useState<any>([]);
-  const [editDescriptionTodo, setEditDescriptionTodo] = useState<any>([]);
-  const [editTodoValue, setEditTodoValue] = useState<any>([]);
+  const { newtodotask, setNewtodotask } = useContext(TodoContext);
+  const [editTodoTask, setEditTodoTask] = useState([]);
+  const [editDescriptionTodo, setEditDescriptionTodo] = useState([]);
+  const [editTodoValue, setEditTodoValue] = useState([]);
   const { saveIdTodo } = useContext(TodoContext);
-  const { saveTodoName } = useContext<any>(TodoContext);
+  const { saveTodoName } = useContext(TodoContext);
 
   const editTime = () => {
     let today = new Date();
@@ -36,8 +36,8 @@ export const EditTodo = () => {
             : todo
         )
       );
-      setEditTodoTask('');
-      setEditDescriptionTodo('');
+      setEditTodoTask([]);
+      setEditDescriptionTodo([]);
     },
     [newtodotask, editTodoTask, editDescriptionTodo, editTime, editTodoValue]
   );

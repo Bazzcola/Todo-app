@@ -1,13 +1,13 @@
 import React, { useCallback, useContext, useState } from 'react';
-import { TodoContext } from 'components/context/TodoContext';
 import dayjs from 'dayjs';
+import { TodoContext } from 'components/context/TodoContext';
 import 'components/molecules/EditCategory/EditCategory.css';
 
 export const EditCategory = () => {
-  const { newcategory, setNewcategory } = useContext<any>(TodoContext);
-  const [editTodo, setEditTodo] = useState<any>([]);
-  const [editDescription, setEditDescription] = useState<any>([]);
-  const [editCatValue, setEditCatValue] = useState<any>([]);
+  const { newcategory, setNewcategory } = useContext(TodoContext);
+  const [editTodo, setEditTodo] = useState([]);
+  const [editDescription, setEditDescription] = useState([]);
+  const [editCatValue, setEditCatValue] = useState([]);
   const { saveId } = useContext(TodoContext);
 
   const editTime = () => {
@@ -33,8 +33,8 @@ export const EditCategory = () => {
             : todo
         )
       );
-      setEditTodo('');
-      setEditDescription('');
+      setEditTodo([]);
+      setEditDescription([]);
     },
     [newcategory, editTodo, editDescription, editTime, editCatValue]
   );

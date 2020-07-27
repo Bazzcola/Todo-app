@@ -1,10 +1,12 @@
 import React, { useEffect, useContext } from 'react';
-import 'components/organism/Todocategory/Todocategory.css';
 import { TodoCategoryItem } from 'components/molecules/TodoCategoryItem/TodoCategoryItem';
 import { TodoContext } from 'components/context/TodoContext';
+import { AddCategoryWindow } from 'components/molecules/AddCategoryWindow/AddCategoryWindow';
+import { EditCategory } from 'components/molecules/EditCategory/EditCategory';
+import 'components/organism/Todocategory/Todocategory.css';
 
 export const Todocategory = () => {
-  const { newcategory, setNewcategory } = useContext<any>(TodoContext);
+  const { newcategory, setNewcategory } = useContext(TodoContext);
 
   const hideBox = () => {
     let x: any = document.getElementById('form_hide');
@@ -30,17 +32,6 @@ export const Todocategory = () => {
     setNewcategory(sortedTodos);
   }, [sortedTodos]);
 
-  useEffect(() => {
-    const data = localStorage.getItem('list_category');
-    if (data) {
-      setNewcategory(JSON.parse(data));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('list_category', JSON.stringify(sortedTodos));
-  });
-
   return (
     <div className="category_list__box">
       <div className="add_todo">
@@ -49,6 +40,8 @@ export const Todocategory = () => {
         </button>
         <TodoCategoryItem />
       </div>
+      <AddCategoryWindow />
+      <EditCategory />
     </div>
   );
 };
