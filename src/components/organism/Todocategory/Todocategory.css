@@ -4,6 +4,7 @@
 
 .add_todo {
   max-width: 320px;
+  margin-right: 20px;
 }
 
 .add_cat {

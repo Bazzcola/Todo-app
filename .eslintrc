@@ -1,13 +1,14 @@
-{   
+{
     "env": {
         "browser": true,
         "es2020": true
     },
     "plugins": ["react", "prettier"],
-    "rules": {   
-        "react/jsx-uses-react": "error",   
+    "rules": {
+        "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
-        "react/prop-types": "off"
+        "react/prop-types": "off",
+        "react-hooks/exhaustive-deps": "off"
     },
     "extends": ["airbnb", "prettier"]
 }

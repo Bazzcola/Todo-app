@@ -82,7 +82,7 @@ export const TodoCategoryItem = () => {
               key={todo.id}
               onClick={clickCat(todo.title)}
             >
-              <p className="priority">Priority: {todo.priority}</p>
+              <p className="priority_level">Priority: {todo.priority}</p>
               <h1 className={todo.done ? 'done' : ''}>{todo.title}</h1>
               <input
                 className="checkbox"

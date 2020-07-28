@@ -34,9 +34,11 @@ export const TodoTask = () => {
 
   return (
     <div className="todo_list__box">
-      <button className="add_todo__task" onClick={hideBox}>
-        <p>+</p>
-      </button>
+      <div className="btn_box">
+        <button className="add_todo__task" onClick={hideBox}>
+          <p>+</p>
+        </button>
+      </div>
       <TodoTaskItem />
       <AddTodoTaskWindow />
       <EditTodo />

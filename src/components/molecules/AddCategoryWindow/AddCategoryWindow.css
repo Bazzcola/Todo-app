@@ -37,6 +37,13 @@
   border: 3px black solid;
 }
 
+.warning {
+  margin: 0px;
+  color: red;
+  font-size: 22px;
+  font-weight: 700;
+}
+
 .add_form {
   width: 100%;
   text-align: center;

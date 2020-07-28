@@ -12,6 +12,13 @@
   margin: 0 auto;
 }
 
+.warning2 {
+  margin: 0px;
+  color: red;
+  font-size: 22px;
+  font-weight: 700;
+}
+
 .form_box_todo span {
   position: absolute;
   right: 20px;

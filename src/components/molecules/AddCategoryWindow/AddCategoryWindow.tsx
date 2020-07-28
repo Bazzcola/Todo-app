@@ -1,19 +1,13 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import dayjs from 'dayjs';
 import { TodoContext } from 'components/context/TodoContext';
 import 'components/molecules/AddCategoryWindow/AddCategoryWindow.css';
 
 export const AddCategoryWindow = () => {
-  const {
-    newcategory,
-    setNewcategory,
-    description,
-    setDescription,
-    value,
-    setValue,
-    addtodo,
-    setAddtodo
-  } = useContext(TodoContext);
+  const { newcategory, setNewcategory } = useContext(TodoContext);
+  const [description, setDescription] = useState('');
+  const [value, setValue] = useState('');
+  const [addtodo, setAddtodo] = useState('');
 
   const currentTime = () => {
     let today = new Date();
@@ -92,7 +86,7 @@ export const AddCategoryWindow = () => {
     <div className="form_box" id="form_hide" style={{ display: 'none' }}>
       <span onClick={hideBox}>X</span>
       <form onSubmit={addCategory} className="add_form">
-        <p id="warning" style={{ display: 'none' }}>
+        <p id="warning" style={{ display: 'none' }} className="warning">
           Fill all fields
         </p>
         <h3>Priority level:</h3>

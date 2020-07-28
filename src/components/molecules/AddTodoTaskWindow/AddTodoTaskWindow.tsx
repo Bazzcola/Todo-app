@@ -4,18 +4,10 @@ import { TodoContext } from 'components/context/TodoContext';
 import 'components/molecules/AddTodoTaskWindow/AddTodoTaskWindow.css';
 
 export const AddTodoTaskWindow = () => {
-  const {
-    newcategory,
-    newtodotask,
-    setNewtodotask,
-    descriptionTodo,
-    setDescriptionTodo,
-    valueTodo,
-    setValueTodo,
-    addtodoTitle,
-    setAddtodoTitle
-  } = useContext(TodoContext);
-
+  const { newcategory, newtodotask, setNewtodotask } = useContext(TodoContext);
+  const [descriptionTodo, setDescriptionTodo] = useState('');
+  const [valueTodo, setValueTodo] = useState('');
+  const [addtodoTitle, setAddtodoTitle] = useState('');
   const [addCat, setAddCat] = useState('none');
 
   const currentTime = () => {
@@ -102,7 +94,7 @@ export const AddTodoTaskWindow = () => {
     <div className="form_box_todo" id="form_hide2" style={{ display: 'none' }}>
       <span onClick={hideBox}>X</span>
       <form onSubmit={addTodoItem} className="add_form">
-        <p id="warning2" style={{ display: 'none' }}>
+        <p id="warning2" style={{ display: 'none' }} className="warning2">
           Fill all fields
         </p>
         <h3>Priority level:</h3>

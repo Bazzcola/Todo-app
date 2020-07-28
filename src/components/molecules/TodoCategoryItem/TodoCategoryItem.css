@@ -13,12 +13,19 @@
   margin-top: 10px;
   font-size: 22px;
   font-weight: 700;
+  width: 200px;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .add_todo__item h2 {
   margin: 0;
   font-size: 22px;
   font-weight: 500;
+  width: 200px;
+  margin: 0 auto;
+  margin-bottom: 10px;
 }
 
 .add_todo__item span {
@@ -35,8 +42,10 @@
 
 .checkbox {
   position: absolute;
-  top: 0px;
-  right: 0px;
+  top: 10px;
+  right: 15px;
+  width: 20px;
+  height: 20px;
 }
 
 .delete_btn {
@@ -58,4 +67,8 @@
   letter-spacing: 1px;
   cursor: pointer;
   margin: 0px 5px 0px 5px;
+}
+
+.priority_level {
+  font-weight: 700;
 }
