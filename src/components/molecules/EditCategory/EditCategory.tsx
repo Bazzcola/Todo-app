@@ -1,14 +1,18 @@
 import React, { useCallback, useContext, useState } from 'react';
 import dayjs from 'dayjs';
 import { TodoContext } from 'components/context/TodoContext';
+import { Loader } from 'components/molecules/Loader/Loader';
 import 'components/molecules/EditCategory/EditCategory.css';
 
 export const EditCategory = () => {
+  const { editDescValue } = useContext(TodoContext);
+  const { editTitleValue } = useContext(TodoContext);
   const { newcategory, setNewcategory } = useContext(TodoContext);
-  const [editTodo, setEditTodo] = useState([]);
-  const [editDescription, setEditDescription] = useState([]);
+  const [editTodo, setEditTodo] = useState([editTitleValue]);
+  const [editDescription, setEditDescription] = useState([editDescValue]);
   const [editCatValue, setEditCatValue] = useState([]);
   const { saveId } = useContext(TodoContext);
+  const { loader, setLoader } = useContext(TodoContext);
 
   const editTime = () => {
     let today = new Date();
@@ -35,6 +39,7 @@ export const EditCategory = () => {
       );
       setEditTodo([]);
       setEditDescription([]);
+      setLoader(!loader);
     },
     [newcategory, editTodo, editDescription, editTime, editCatValue]
   );
@@ -60,16 +65,15 @@ export const EditCategory = () => {
     [editCatValue]
   );
 
-  const hideBox = () => {
-    let x: any = document.getElementById('edit');
-    x.style.display === 'none'
-      ? (x.style.display = 'block')
-      : (x.style.display = 'none');
-  };
+  // const hideBox = () => {
+  //   let x: any = document.getElementById('edit');
+  //   x.style.display === 'none'
+  //     ? (x.style.display = 'block')
+  //     : (x.style.display = 'none');
+  // };
 
   return (
-    <div className="form_box_edit__cat" id="edit" style={{ display: 'none' }}>
-      <span onClick={hideBox}>X</span>
+    <div className="form_box_edit__cat" id="edit" style={{ display: 'block' }}>
       <form onSubmit={EditCategory()} className="add_form">
         <h3>Priority level:</h3>
         <select onChange={editValue} className="priority_select">
@@ -82,15 +86,15 @@ export const EditCategory = () => {
         <input
           type="text"
           onChange={setTodo}
-          value={editTodo}
-          placeholder="Add Todo"
+          // value={editTodo}
+          defaultValue={editTodo}
         />
         <br />
         <input
           type="text"
           onChange={setDesc}
-          value={editDescription}
-          placeholder="Add Description"
+          // value={editDescription}
+          defaultValue={editDescription}
         />
         <br />
         <button className="btn_add">Add</button>

@@ -8,7 +8,7 @@ export const AddCategoryWindow = () => {
   const [description, setDescription] = useState('');
   const [value, setValue] = useState('');
   const [addtodo, setAddtodo] = useState('');
-
+  const { loaderCat, setLoaderCat } = useContext(TodoContext);
   const currentTime = () => {
     let today = new Date();
     let dateTime = dayjs(today).format('MMM D, YYYY h:mm A');
@@ -48,6 +48,7 @@ export const AddCategoryWindow = () => {
       ]);
       setAddtodo('');
       setDescription('');
+      setLoaderCat(!loaderCat);
     },
     [addtodo, description, newcategory, value]
   );
@@ -83,7 +84,7 @@ export const AddCategoryWindow = () => {
   };
 
   return (
-    <div className="form_box" id="form_hide" style={{ display: 'none' }}>
+    <div className="form_box" id="form_hide">
       <span onClick={hideBox}>X</span>
       <form onSubmit={addCategory} className="add_form">
         <p id="warning" style={{ display: 'none' }} className="warning">

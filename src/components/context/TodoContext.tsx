@@ -24,16 +24,24 @@ interface Props {
   newtodotask: Todo[];
   newfiltertodotask: Todo[];
   filteredCategory: string;
+  editTitleValue: string;
+  editDescValue: string;
   saveId: any;
   saveIdTodo: any;
   saveTodoName: string;
+  loader: boolean;
+  loaderCat: boolean;
   setNewcategory: React.Dispatch<React.SetStateAction<Categories[]>>;
   setNewtodotask: React.Dispatch<React.SetStateAction<Todo[]>>;
   setNewfiltertodotask: React.Dispatch<React.SetStateAction<Todo[]>>;
   setFilteredCategory: React.Dispatch<React.SetStateAction<string>>;
+  setEditTitleValue: React.Dispatch<React.SetStateAction<string>>;
+  setEditDescValue: React.Dispatch<React.SetStateAction<string>>;
   setSaveId: React.Dispatch<React.SetStateAction<any>>;
   setSaveIdTodo: React.Dispatch<React.SetStateAction<any>>;
   setSaveTodoName: React.Dispatch<React.SetStateAction<string>>;
+  setLoader: React.Dispatch<React.SetStateAction<boolean>>;
+  setLoaderCat: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const defaultValue = {
@@ -43,14 +51,22 @@ const defaultValue = {
   filteredCategory: '',
   saveId: undefined,
   saveIdTodo: undefined,
+  editTitleValue: '',
+  editDescValue: '',
   saveTodoName: '',
+  loader: true,
+  loaderCat: true,
   setNewcategory: () => {},
   setNewtodotask: () => {},
+  setEditTitleValue: () => {},
+  setEditDescValue: () => {},
   setNewfiltertodotask: () => {},
   setFilteredCategory: () => {},
   setSaveId: () => {},
   setSaveIdTodo: () => {},
-  setSaveTodoName: () => {}
+  setSaveTodoName: () => {},
+  setLoader: () => {},
+  setLoaderCat: () => {}
 };
 export const TodoContext = React.createContext<Props>(defaultValue);
 
@@ -62,6 +78,10 @@ export const ProviderTodoContext = (props: any) => {
   const [saveId, setSaveId] = useState<number | string>('');
   const [saveIdTodo, setSaveIdTodo] = useState<number | string>('');
   const [saveTodoName, setSaveTodoName] = useState<string>('');
+  const [editTitleValue, setEditTitleValue] = useState<string>('');
+  const [editDescValue, setEditDescValue] = useState<string>('');
+  const [loader, setLoader] = useState<boolean>(true);
+  const [loaderCat, setLoaderCat] = useState<boolean>(true);
 
   useEffect(() => {
     const data = localStorage.getItem('list_category');
@@ -89,6 +109,14 @@ export const ProviderTodoContext = (props: any) => {
   return (
     <TodoContext.Provider
       value={{
+        loaderCat,
+        setLoaderCat,
+        loader,
+        setLoader,
+        editDescValue,
+        setEditDescValue,
+        editTitleValue,
+        setEditTitleValue,
         saveTodoName,
         setSaveTodoName,
         saveIdTodo,

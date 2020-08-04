@@ -1,5 +1,6 @@
 import React, { useContext, useCallback, useEffect } from 'react';
 import { TodoContext } from 'components/context/TodoContext';
+import { EditCategory } from 'components/molecules/EditCategory/EditCategory';
 import 'components/molecules/TodoCategoryItem/TodoCategoryItem.css';
 
 export const TodoCategoryItem = () => {
@@ -8,7 +9,9 @@ export const TodoCategoryItem = () => {
   const { setNewfiltertodotask } = useContext(TodoContext);
   const { filteredCategory, setFilteredCategory } = useContext(TodoContext);
   const { setSaveId } = useContext(TodoContext);
-
+  const { setEditDescValue } = useContext(TodoContext);
+  const { setEditTitleValue } = useContext(TodoContext);
+  const { loader, setLoader } = useContext(TodoContext);
   const removeTodo = useCallback(
     (todo) => () => {
       setNewcategory(
@@ -30,13 +33,6 @@ export const TodoCategoryItem = () => {
     [newcategory]
   );
 
-  const edithideBox = (id: number) => {
-    setSaveId(id);
-    let x: any = document.getElementById('edit');
-    x.style.display === 'none'
-      ? (x.style.display = 'block')
-      : (x.style.display = 'none');
-  };
   const priorities: any = {
     none: 0,
     low: 1,
@@ -62,8 +58,16 @@ export const TodoCategoryItem = () => {
     setFilteredCategory(title);
   };
 
+  const edithideBox = (id: number, description: string, title: string) => {
+    setSaveId(id);
+    setEditDescValue(description);
+    setEditTitleValue(title);
+    setLoader(!loader);
+  };
+
   return (
     <>
+      {loader ? loader : <EditCategory />}
       {newcategory.map(
         (
           todo: {
@@ -94,7 +98,9 @@ export const TodoCategoryItem = () => {
               <span className="create_time">{todo.date}</span>
               <button
                 className="edit_todo__cat"
-                onClick={() => edithideBox(todo.id)}
+                onClick={() =>
+                  edithideBox(todo.id, todo.description, todo.title)
+                }
               >
                 Edit
               </button>
