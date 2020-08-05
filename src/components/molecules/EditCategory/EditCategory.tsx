@@ -21,9 +21,9 @@ export const EditCategory = () => {
   };
 
   const EditCategory = useCallback(
-    () => (e: any) => {
+    () => (e: { preventDefault: () => void }) => {
       e.preventDefault();
-      setNewcategory((prevNewTodos: any) =>
+      setNewcategory((prevNewTodos) =>
         prevNewTodos.map((todo: any) =>
           todo.id === saveId
             ? {
@@ -59,7 +59,7 @@ export const EditCategory = () => {
   );
 
   const editValue = useCallback(
-    (event: any) => {
+    (event) => {
       setEditCatValue(event.target.value);
     },
     [editCatValue]

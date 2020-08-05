@@ -6,9 +6,10 @@ import 'components/molecules/AddTodoTaskWindow/AddTodoTaskWindow.css';
 export const AddTodoTaskWindow = () => {
   const { newcategory, newtodotask, setNewtodotask } = useContext(TodoContext);
   const [descriptionTodo, setDescriptionTodo] = useState('');
-  const [valueTodo, setValueTodo] = useState('');
+  const [valueTodo, setValueTodo] = useState('low');
   const [addtodoTitle, setAddtodoTitle] = useState('');
-  const [addCat, setAddCat] = useState('none');
+  const [addCat, setAddCat] = useState('');
+  const { taskloader, setTaskloader } = useContext(TodoContext);
 
   const currentTime = () => {
     let today = new Date();
@@ -51,6 +52,7 @@ export const AddTodoTaskWindow = () => {
       ]);
       setAddtodoTitle('');
       setDescriptionTodo('');
+      setTaskloader(!taskloader);
     },
     [addtodoTitle, descriptionTodo, newtodotask, valueTodo, addCat]
   );
@@ -70,36 +72,26 @@ export const AddTodoTaskWindow = () => {
   );
 
   const addValue = useCallback(
-    (event: any) => {
+    (event) => {
       setValueTodo(event.target.value);
     },
     [valueTodo]
   );
   const addCategory = useCallback(
-    (event: any) => {
+    (event) => {
       setAddCat(event.target.value);
     },
     [addCat]
   );
 
-  const hideBox = () => {
-    let x: any = document.getElementById('form_hide2');
-    if (x?.style.display === 'none') {
-      x.style.display = 'block';
-    } else {
-      x.style.display = 'none';
-    }
-  };
   return (
-    <div className="form_box_todo" id="form_hide2" style={{ display: 'none' }}>
-      <span onClick={hideBox}>X</span>
+    <div className="form_box_todo" id="form_hide2">
       <form onSubmit={addTodoItem} className="add_form">
         <p id="warning2" style={{ display: 'none' }} className="warning2">
           Fill all fields
         </p>
         <h3>Priority level:</h3>
         <select onChange={addValue} className="priority_select">
-          <option value="none">none</option>
           <option value="low">low</option>
           <option value="medium">medium</option>
           <option value="high">high</option>
@@ -109,6 +101,7 @@ export const AddTodoTaskWindow = () => {
           className="priority_select"
           defaultValue={'asdasdsad'}
         >
+          <option>none</option>
           {newcategory.map((todo: { title: string; id: number }) => (
             <option value={todo.title} key={todo.id}>
               {todo.title}

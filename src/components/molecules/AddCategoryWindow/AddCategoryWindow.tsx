@@ -68,24 +68,14 @@ export const AddCategoryWindow = () => {
   );
 
   const addValue = useCallback(
-    (event: any) => {
+    (event) => {
       setValue(event.target.value);
     },
     [value]
   );
 
-  const hideBox = () => {
-    let x: any = document.getElementById('form_hide');
-    if (x?.style.display === 'none') {
-      x.style.display = 'block';
-    } else {
-      x.style.display = 'none';
-    }
-  };
-
   return (
     <div className="form_box" id="form_hide">
-      <span onClick={hideBox}>X</span>
       <form onSubmit={addCategory} className="add_form">
         <p id="warning" style={{ display: 'none' }} className="warning">
           Fill all fields

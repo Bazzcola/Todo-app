@@ -4,13 +4,18 @@ import { TodoContext } from 'components/context/TodoContext';
 import 'components/molecules/EditTodo/EditTodo.css';
 
 export const EditTodo = () => {
+  const { saveTodoTitle } = useContext(TodoContext);
+  const { saveTodoDesc } = useContext(TodoContext);
+  const { newcategory } = useContext(TodoContext);
   const { newtodotask, setNewtodotask } = useContext(TodoContext);
-  const [editTodoTask, setEditTodoTask] = useState([]);
-  const [editDescriptionTodo, setEditDescriptionTodo] = useState([]);
+  const [editTodoTask, setEditTodoTask] = useState([saveTodoTitle]);
+  const [editDescriptionTodo, setEditDescriptionTodo] = useState([
+    saveTodoDesc
+  ]);
   const [editTodoValue, setEditTodoValue] = useState([]);
   const { saveIdTodo } = useContext(TodoContext);
-  const { saveTodoName } = useContext(TodoContext);
-
+  const [editCatName, setEditCatName] = useState('');
+  const { editLoader, setEditLoader } = useContext(TodoContext);
   const editTime = () => {
     let today = new Date();
     let dateTime = dayjs(today).format('MMM D, YYYY h:mm A');
@@ -18,10 +23,10 @@ export const EditTodo = () => {
   };
 
   const EditTodo = useCallback(
-    () => (e: any) => {
+    () => (e: { preventDefault: () => void }) => {
       e.preventDefault();
       console.log(saveIdTodo);
-      setNewtodotask((prevNewTodos: any) =>
+      setNewtodotask((prevNewTodos) =>
         prevNewTodos.map((todo: any) =>
           todo.id === saveIdTodo
             ? {
@@ -31,15 +36,23 @@ export const EditTodo = () => {
                 done: false,
                 priority: editTodoValue,
                 date: editTime(),
-                categories: saveTodoName
+                categories: editCatName
               }
             : todo
         )
       );
       setEditTodoTask([]);
       setEditDescriptionTodo([]);
+      setEditLoader(!editLoader);
     },
-    [newtodotask, editTodoTask, editDescriptionTodo, editTime, editTodoValue]
+    [
+      newtodotask,
+      editTodoTask,
+      editDescriptionTodo,
+      editTime,
+      editTodoValue,
+      editCatName
+    ]
   );
 
   const setTodo = useCallback(
@@ -57,25 +70,23 @@ export const EditTodo = () => {
   );
 
   const editValue = useCallback(
-    (event: any) => {
+    (event) => {
       setEditTodoValue(event.target.value);
     },
     [editTodoValue]
   );
 
-  const hideBox = () => {
-    let x: any = document.getElementById('edit13');
-    x.style.display === 'none'
-      ? (x.style.display = 'block')
-      : (x.style.display = 'none');
-  };
+  const editСategory = useCallback(
+    (event) => {
+      setEditCatName(event.target.value);
+    },
+    [editCatName]
+  );
+
+  const hideBox = () => {};
 
   return (
-    <div
-      className="form_box_edit__todo"
-      id="edit13"
-      style={{ display: 'none' }}
-    >
+    <div className="form_box_edit__todo" id="edit13">
       <span onClick={hideBox}>X</span>
       <form onSubmit={EditTodo()} className="add_form">
         <h3>Priority level:</h3>
@@ -85,19 +96,24 @@ export const EditTodo = () => {
           <option value="medium">medium</option>
           <option value="high">high</option>
         </select>
+        <select
+          onChange={editСategory}
+          className="priority_select"
+          defaultValue={'asdasdsad'}
+        >
+          {newcategory.map((todo: { title: string; id: number }) => (
+            <option value={todo.title} key={todo.id} onChange={editСategory}>
+              {todo.title}
+            </option>
+          ))}
+        </select>
         <br />
-        <input
-          type="text"
-          onChange={setTodo}
-          value={editTodoTask}
-          placeholder="Add Todo"
-        />
+        <input type="text" onChange={setTodo} defaultValue={editTodoTask} />
         <br />
         <input
           type="text"
           onChange={setDesc}
-          value={editDescriptionTodo}
-          placeholder="Add Description"
+          defaultValue={editDescriptionTodo}
         />
         <br />
         <button className="btn_add">Add</button>

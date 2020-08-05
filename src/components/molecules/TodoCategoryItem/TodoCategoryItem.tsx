@@ -12,11 +12,11 @@ export const TodoCategoryItem = () => {
   const { setEditDescValue } = useContext(TodoContext);
   const { setEditTitleValue } = useContext(TodoContext);
   const { loader, setLoader } = useContext(TodoContext);
+  const { setGetTodoValue } = useContext(TodoContext);
+
   const removeTodo = useCallback(
     (todo) => () => {
-      setNewcategory(
-        newcategory.filter((otherTodo: any) => otherTodo !== todo)
-      );
+      setNewcategory(newcategory.filter((otherTodo) => otherTodo !== todo));
     },
     [newcategory]
   );
@@ -29,32 +29,36 @@ export const TodoCategoryItem = () => {
         done: !todo.done
       });
       setNewcategory(newtodos);
+      setGetTodoValue(todo.done);
     },
     [newcategory]
   );
 
-  const priorities: any = {
+  const priorities: { [key: string]: number } = {
     none: 0,
     low: 1,
     medium: 2,
     high: 3
   };
 
-  const sortedTodosTask = newtodotask.sort((a: any, b: any) => {
-    return priorities[b.priority] - priorities[a.priority];
-  });
+  const sortedTodosTask = newtodotask.sort(
+    (a: { priority: string }, b: { priority: string }) => {
+      return priorities[b.priority] - priorities[a.priority];
+    }
+  );
+
   useEffect(() => {
     setNewtodotask(sortedTodosTask);
   }, [sortedTodosTask]);
 
   useEffect(() => {
     const x = newtodotask.filter(
-      (elem: any) => elem.categories === filteredCategory
+      (elem) => elem.categories === filteredCategory
     );
     setNewfiltertodotask(x);
   }, [filteredCategory, newtodotask]);
 
-  const clickCat = (title: any) => () => {
+  const clickCat = (title: string) => () => {
     setFilteredCategory(title);
   };
 
@@ -80,9 +84,9 @@ export const TodoCategoryItem = () => {
           },
           index: number
         ) => (
-          <div key={todo.id}>
+          <div key={todo.id} className="add_todo__item">
             <div
-              className="add_todo__item"
+              className="add_todo21"
               key={todo.id}
               onClick={clickCat(todo.title)}
             >

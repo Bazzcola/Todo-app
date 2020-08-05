@@ -1,6 +1,7 @@
 import React, { useContext, useCallback } from 'react';
 import { TodoContext } from 'components/context/TodoContext';
 import 'components/molecules/TodoTaskItem/TodoTaskItem.css';
+import { EditTodo } from '../EditTodo/EditTodo';
 
 export const TodoTaskItem = () => {
   const { newtodotask, setNewtodotask } = useContext(TodoContext);
@@ -8,11 +9,15 @@ export const TodoTaskItem = () => {
   const { filteredCategory } = useContext(TodoContext);
   const { setSaveIdTodo } = useContext(TodoContext);
   const { setSaveTodoName } = useContext(TodoContext);
+  const { setSaveTodoTitle } = useContext(TodoContext);
+  const { setSaveTodoDesc } = useContext(TodoContext);
+  const { editLoader, setEditLoader } = useContext(TodoContext);
+  const { getTodoValue } = useContext(TodoContext);
 
   const removeTodoItem = useCallback(
     (todo) => () => {
-      setNewtodotask((prevNewTodos: any) =>
-        prevNewTodos.filter((otherTodo: any) => otherTodo !== todo)
+      setNewtodotask((prevNewTodos) =>
+        prevNewTodos.filter((otherTodo) => otherTodo !== todo)
       );
     },
     []
@@ -20,8 +25,8 @@ export const TodoTaskItem = () => {
 
   const doneValue = useCallback(
     (id: number) => () => {
-      setNewtodotask((prevNewTodos: any) =>
-        prevNewTodos.map((todo: any) => ({
+      setNewtodotask((prevNewTodos) =>
+        prevNewTodos.map((todo) => ({
           ...todo,
           done: todo.id === id ? !todo.done : todo.done
         }))
@@ -30,15 +35,17 @@ export const TodoTaskItem = () => {
     []
   );
 
-  const hideBox = (id: number, categories: string) => {
+  const hideBox = (
+    id: number,
+    categories: string,
+    title: string,
+    description: string
+  ) => {
     setSaveTodoName(categories);
     setSaveIdTodo(id);
-    let x: any = document.getElementById('edit13');
-    if (x && x.style.display === 'none') {
-      x.style.display = 'block';
-    } else {
-      x.style.display = 'none';
-    }
+    setSaveTodoTitle(title);
+    setSaveTodoDesc(description);
+    setEditLoader(!editLoader);
   };
 
   return (
@@ -56,23 +63,25 @@ export const TodoTaskItem = () => {
           <div className="add_todo__item_task" key={todo.id}>
             <p className="categoriesName">Category: {todo.categories}</p>
             <p className="priorityTodo">Priority: {todo.priority}</p>
-            <h1 className={todo.done ? 'done' : ''}>{todo.title}</h1>
+            <h1 className={getTodoValue ? '' : 'done'}>{todo.title}</h1>
 
             <input
               className="checkbox"
               type="checkbox"
-              checked={todo.done}
+              checked={!getTodoValue}
               onChange={doneValue(todo.id)}
             />
 
-            <h2 className={todo.done ? 'done' : ''}>{todo.description}</h2>
+            <h2 className={getTodoValue ? '' : 'done'}>{todo.description}</h2>
             <span className="create_time">{todo.date}</span>
 
             <br />
 
             <button
               className="edit_todo__task"
-              onClick={() => hideBox(todo.id, todo.categories)}
+              onClick={() =>
+                hideBox(todo.id, todo.categories, todo.title, todo.description)
+              }
             >
               Edit
             </button>
@@ -83,6 +92,7 @@ export const TodoTaskItem = () => {
           </div>
         )
       )}
+      {editLoader ? editLoader : <EditTodo />}
     </>
   );
 };

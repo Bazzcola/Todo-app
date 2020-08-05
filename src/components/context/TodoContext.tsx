@@ -19,29 +19,39 @@ export interface Todo {
   categories: string;
 }
 
-interface Props {
+export interface Props {
+  editLoader: boolean;
   newcategory: Categories[];
   newtodotask: Todo[];
   newfiltertodotask: Todo[];
   filteredCategory: string;
   editTitleValue: string;
   editDescValue: string;
-  saveId: any;
-  saveIdTodo: any;
+  saveId: number | null;
+  saveIdTodo: number | null;
   saveTodoName: string;
   loader: boolean;
   loaderCat: boolean;
+  taskloader: boolean;
+  saveTodoTitle: string;
+  saveTodoDesc: string;
+  getTodoValue: boolean;
+  setEditLoader: React.Dispatch<React.SetStateAction<boolean>>;
+  setTaskloader: React.Dispatch<React.SetStateAction<boolean>>;
   setNewcategory: React.Dispatch<React.SetStateAction<Categories[]>>;
   setNewtodotask: React.Dispatch<React.SetStateAction<Todo[]>>;
   setNewfiltertodotask: React.Dispatch<React.SetStateAction<Todo[]>>;
   setFilteredCategory: React.Dispatch<React.SetStateAction<string>>;
   setEditTitleValue: React.Dispatch<React.SetStateAction<string>>;
   setEditDescValue: React.Dispatch<React.SetStateAction<string>>;
-  setSaveId: React.Dispatch<React.SetStateAction<any>>;
-  setSaveIdTodo: React.Dispatch<React.SetStateAction<any>>;
+  setSaveId: React.Dispatch<React.SetStateAction<number | null>>;
+  setSaveIdTodo: React.Dispatch<React.SetStateAction<number | null>>;
   setSaveTodoName: React.Dispatch<React.SetStateAction<string>>;
   setLoader: React.Dispatch<React.SetStateAction<boolean>>;
   setLoaderCat: React.Dispatch<React.SetStateAction<boolean>>;
+  setSaveTodoTitle: React.Dispatch<React.SetStateAction<string>>;
+  setSaveTodoDesc: React.Dispatch<React.SetStateAction<string>>;
+  setGetTodoValue: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const defaultValue = {
@@ -49,13 +59,19 @@ const defaultValue = {
   newtodotask: [],
   newfiltertodotask: [],
   filteredCategory: '',
-  saveId: undefined,
-  saveIdTodo: undefined,
+  saveId: null,
+  saveIdTodo: null,
   editTitleValue: '',
   editDescValue: '',
   saveTodoName: '',
   loader: true,
   loaderCat: true,
+  taskloader: true,
+  editLoader: true,
+  saveTodoDesc: '',
+  saveTodoTitle: '',
+  getTodoValue: true,
+  setTaskloader: () => {},
   setNewcategory: () => {},
   setNewtodotask: () => {},
   setEditTitleValue: () => {},
@@ -66,23 +82,31 @@ const defaultValue = {
   setSaveIdTodo: () => {},
   setSaveTodoName: () => {},
   setLoader: () => {},
-  setLoaderCat: () => {}
+  setLoaderCat: () => {},
+  setSaveTodoDesc: () => {},
+  setSaveTodoTitle: () => {},
+  setEditLoader: () => {},
+  setGetTodoValue: () => {}
 };
 export const TodoContext = React.createContext<Props>(defaultValue);
 
 export const ProviderTodoContext = (props: any) => {
+  const [getTodoValue, setGetTodoValue] = useState<boolean>(false);
+  const [editLoader, setEditLoader] = useState<boolean>(true);
   const [newcategory, setNewcategory] = useState<Categories[]>([]);
   const [newtodotask, setNewtodotask] = useState<Todo[]>([]);
   const [newfiltertodotask, setNewfiltertodotask] = useState<Todo[]>([]);
   const [filteredCategory, setFilteredCategory] = useState<string>('');
-  const [saveId, setSaveId] = useState<number | string>('');
-  const [saveIdTodo, setSaveIdTodo] = useState<number | string>('');
+  const [saveId, setSaveId] = useState<number | null>(null);
+  const [saveIdTodo, setSaveIdTodo] = useState<number | null>(null);
   const [saveTodoName, setSaveTodoName] = useState<string>('');
   const [editTitleValue, setEditTitleValue] = useState<string>('');
   const [editDescValue, setEditDescValue] = useState<string>('');
   const [loader, setLoader] = useState<boolean>(true);
   const [loaderCat, setLoaderCat] = useState<boolean>(true);
-
+  const [taskloader, setTaskloader] = useState<boolean>(true);
+  const [saveTodoDesc, setSaveTodoDesc] = useState<string>('');
+  const [saveTodoTitle, setSaveTodoTitle] = useState<string>('');
   useEffect(() => {
     const data = localStorage.getItem('list_category');
     if (data) {
@@ -109,6 +133,16 @@ export const ProviderTodoContext = (props: any) => {
   return (
     <TodoContext.Provider
       value={{
+        getTodoValue,
+        setGetTodoValue,
+        editLoader,
+        setEditLoader,
+        saveTodoDesc,
+        setSaveTodoDesc,
+        saveTodoTitle,
+        setSaveTodoTitle,
+        taskloader,
+        setTaskloader,
         loaderCat,
         setLoaderCat,
         loader,
