@@ -1,7 +1,7 @@
 import React, { useContext, useCallback } from 'react';
 import { TodoContext } from 'components/context/TodoContext';
-import 'components/molecules/TodoTaskItem/TodoTaskItem.css';
 import { EditTodo } from '../EditTodo/EditTodo';
+import 'components/molecules/TodoTaskItem/TodoTaskItem.css';
 
 export const TodoTaskItem = () => {
   const { newtodotask, setNewtodotask } = useContext(TodoContext);
@@ -12,7 +12,6 @@ export const TodoTaskItem = () => {
   const { setSaveTodoTitle } = useContext(TodoContext);
   const { setSaveTodoDesc } = useContext(TodoContext);
   const { editLoader, setEditLoader } = useContext(TodoContext);
-  const { getTodoValue } = useContext(TodoContext);
 
   const removeTodoItem = useCallback(
     (todo) => () => {
@@ -63,16 +62,16 @@ export const TodoTaskItem = () => {
           <div className="add_todo__item_task" key={todo.id}>
             <p className="categoriesName">Category: {todo.categories}</p>
             <p className="priorityTodo">Priority: {todo.priority}</p>
-            <h1 className={getTodoValue ? '' : 'done'}>{todo.title}</h1>
+            <h1 className={todo.done ? 'done' : ''}>{todo.title}</h1>
 
             <input
               className="checkbox"
               type="checkbox"
-              checked={!getTodoValue}
+              checked={todo.done}
               onChange={doneValue(todo.id)}
             />
 
-            <h2 className={getTodoValue ? '' : 'done'}>{todo.description}</h2>
+            <h2 className={todo.done ? 'done' : ''}>{todo.description}</h2>
             <span className="create_time">{todo.date}</span>
 
             <br />

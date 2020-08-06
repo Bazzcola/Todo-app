@@ -96,11 +96,7 @@ export const AddTodoTaskWindow = () => {
           <option value="medium">medium</option>
           <option value="high">high</option>
         </select>
-        <select
-          onChange={addCategory}
-          className="priority_select"
-          defaultValue={'asdasdsad'}
-        >
+        <select onChange={addCategory} className="priority_select">
           <option>none</option>
           {newcategory.map((todo: { title: string; id: number }) => (
             <option value={todo.title} key={todo.id}>

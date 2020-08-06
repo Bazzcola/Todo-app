@@ -10,9 +10,10 @@ export const EditCategory = () => {
   const { newcategory, setNewcategory } = useContext(TodoContext);
   const [editTodo, setEditTodo] = useState([editTitleValue]);
   const [editDescription, setEditDescription] = useState([editDescValue]);
-  const [editCatValue, setEditCatValue] = useState([]);
+  const [editCatValue, setEditCatValue] = useState('low');
   const { saveId } = useContext(TodoContext);
   const { loader, setLoader } = useContext(TodoContext);
+  const { catPriority } = useContext(TodoContext);
 
   const editTime = () => {
     let today = new Date();
@@ -65,37 +66,19 @@ export const EditCategory = () => {
     [editCatValue]
   );
 
-  // const hideBox = () => {
-  //   let x: any = document.getElementById('edit');
-  //   x.style.display === 'none'
-  //     ? (x.style.display = 'block')
-  //     : (x.style.display = 'none');
-  // };
-
   return (
     <div className="form_box_edit__cat" id="edit" style={{ display: 'block' }}>
       <form onSubmit={EditCategory()} className="add_form">
         <h3>Priority level:</h3>
         <select onChange={editValue} className="priority_select">
-          <option value="none">none</option>
           <option value="low">low</option>
           <option value="medium">medium</option>
           <option value="high">high</option>
         </select>
         <br />
-        <input
-          type="text"
-          onChange={setTodo}
-          // value={editTodo}
-          defaultValue={editTodo}
-        />
+        <input type="text" onChange={setTodo} defaultValue={editTodo} />
         <br />
-        <input
-          type="text"
-          onChange={setDesc}
-          // value={editDescription}
-          defaultValue={editDescription}
-        />
+        <input type="text" onChange={setDesc} defaultValue={editDescription} />
         <br />
         <button className="btn_add">Add</button>
       </form>

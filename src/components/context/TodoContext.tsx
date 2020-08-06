@@ -35,7 +35,8 @@ export interface Props {
   taskloader: boolean;
   saveTodoTitle: string;
   saveTodoDesc: string;
-  getTodoValue: boolean;
+  catPriority: string;
+  setCatPriority: React.Dispatch<React.SetStateAction<string>>;
   setEditLoader: React.Dispatch<React.SetStateAction<boolean>>;
   setTaskloader: React.Dispatch<React.SetStateAction<boolean>>;
   setNewcategory: React.Dispatch<React.SetStateAction<Categories[]>>;
@@ -51,7 +52,6 @@ export interface Props {
   setLoaderCat: React.Dispatch<React.SetStateAction<boolean>>;
   setSaveTodoTitle: React.Dispatch<React.SetStateAction<string>>;
   setSaveTodoDesc: React.Dispatch<React.SetStateAction<string>>;
-  setGetTodoValue: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const defaultValue = {
@@ -70,7 +70,8 @@ const defaultValue = {
   editLoader: true,
   saveTodoDesc: '',
   saveTodoTitle: '',
-  getTodoValue: true,
+  catPriority: '',
+  setCatPriority: () => {},
   setTaskloader: () => {},
   setNewcategory: () => {},
   setNewtodotask: () => {},
@@ -85,13 +86,12 @@ const defaultValue = {
   setLoaderCat: () => {},
   setSaveTodoDesc: () => {},
   setSaveTodoTitle: () => {},
-  setEditLoader: () => {},
-  setGetTodoValue: () => {}
+  setEditLoader: () => {}
 };
 export const TodoContext = React.createContext<Props>(defaultValue);
 
 export const ProviderTodoContext = (props: any) => {
-  const [getTodoValue, setGetTodoValue] = useState<boolean>(false);
+  const [catPriority, setCatPriority] = useState<string>('');
   const [editLoader, setEditLoader] = useState<boolean>(true);
   const [newcategory, setNewcategory] = useState<Categories[]>([]);
   const [newtodotask, setNewtodotask] = useState<Todo[]>([]);
@@ -133,8 +133,8 @@ export const ProviderTodoContext = (props: any) => {
   return (
     <TodoContext.Provider
       value={{
-        getTodoValue,
-        setGetTodoValue,
+        catPriority,
+        setCatPriority,
         editLoader,
         setEditLoader,
         saveTodoDesc,

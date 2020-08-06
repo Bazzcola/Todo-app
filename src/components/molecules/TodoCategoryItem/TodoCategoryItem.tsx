@@ -12,13 +12,16 @@ export const TodoCategoryItem = () => {
   const { setEditDescValue } = useContext(TodoContext);
   const { setEditTitleValue } = useContext(TodoContext);
   const { loader, setLoader } = useContext(TodoContext);
-  const { setGetTodoValue } = useContext(TodoContext);
+  const { setCatPriority } = useContext(TodoContext);
 
   const removeTodo = useCallback(
     (todo) => () => {
       setNewcategory(newcategory.filter((otherTodo) => otherTodo !== todo));
+      setNewtodotask(
+        newtodotask.filter((item) => item.categories !== todo.title)
+      );
     },
-    [newcategory]
+    [newcategory, newtodotask]
   );
 
   const doneValue = useCallback(
@@ -29,7 +32,18 @@ export const TodoCategoryItem = () => {
         done: !todo.done
       });
       setNewcategory(newtodos);
-      setGetTodoValue(todo.done);
+      // setNewcategory(newcategory.filter((otherTodo) => otherTodo !== todo));
+      // setNewtodotask(
+      //   newtodotask.filter((item) => item.categories !== todo.title)
+      // );
+      // setTimeout(() => {
+      //   setNewtodotask(
+      //     newtodotask.filter((item) => item.categories !== todo.title)
+      //   );
+      // }, 1000);
+      // setTimeout(() => {
+      //   setNewcategory(newcategory.filter((otherTodo) => otherTodo !== todo));
+      // }, 500);
     },
     [newcategory]
   );
@@ -62,11 +76,17 @@ export const TodoCategoryItem = () => {
     setFilteredCategory(title);
   };
 
-  const edithideBox = (id: number, description: string, title: string) => {
+  const edithideBox = (
+    id: number,
+    description: string,
+    title: string,
+    priority: string
+  ) => {
     setSaveId(id);
     setEditDescValue(description);
     setEditTitleValue(title);
     setLoader(!loader);
+    setCatPriority(priority);
   };
 
   return (
@@ -103,7 +123,12 @@ export const TodoCategoryItem = () => {
               <button
                 className="edit_todo__cat"
                 onClick={() =>
-                  edithideBox(todo.id, todo.description, todo.title)
+                  edithideBox(
+                    todo.id,
+                    todo.description,
+                    todo.title,
+                    todo.priority
+                  )
                 }
               >
                 Edit

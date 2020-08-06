@@ -6,7 +6,7 @@ import 'components/molecules/AddCategoryWindow/AddCategoryWindow.css';
 export const AddCategoryWindow = () => {
   const { newcategory, setNewcategory } = useContext(TodoContext);
   const [description, setDescription] = useState('');
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState('low');
   const [addtodo, setAddtodo] = useState('');
   const { loaderCat, setLoaderCat } = useContext(TodoContext);
   const currentTime = () => {
@@ -82,7 +82,6 @@ export const AddCategoryWindow = () => {
         </p>
         <h3>Priority level:</h3>
         <select onChange={addValue} className="priority_select">
-          <option value="none">none</option>
           <option value="low">low</option>
           <option value="medium">medium</option>
           <option value="high">high</option>

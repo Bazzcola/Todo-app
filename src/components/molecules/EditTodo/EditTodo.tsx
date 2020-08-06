@@ -12,7 +12,7 @@ export const EditTodo = () => {
   const [editDescriptionTodo, setEditDescriptionTodo] = useState([
     saveTodoDesc
   ]);
-  const [editTodoValue, setEditTodoValue] = useState([]);
+  const [editTodoValue, setEditTodoValue] = useState('low');
   const { saveIdTodo } = useContext(TodoContext);
   const [editCatName, setEditCatName] = useState('');
   const { editLoader, setEditLoader } = useContext(TodoContext);
@@ -91,16 +91,13 @@ export const EditTodo = () => {
       <form onSubmit={EditTodo()} className="add_form">
         <h3>Priority level:</h3>
         <select onChange={editValue} className="priority_select">
-          <option value="none">none</option>
           <option value="low">low</option>
           <option value="medium">medium</option>
           <option value="high">high</option>
         </select>
-        <select
-          onChange={editСategory}
-          className="priority_select"
-          defaultValue={'asdasdsad'}
-        >
+        <br />
+        <h3>Select Category:</h3>
+        <select onChange={editСategory} className="priority_select">
           {newcategory.map((todo: { title: string; id: number }) => (
             <option value={todo.title} key={todo.id} onChange={editСategory}>
               {todo.title}
