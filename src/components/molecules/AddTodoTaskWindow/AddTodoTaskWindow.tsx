@@ -20,7 +20,6 @@ export const AddTodoTaskWindow = () => {
   const addTodoItem = useCallback(
     (event) => {
       event.preventDefault();
-      console.log(addCat);
       if (!descriptionTodo.trim() || !addtodoTitle.trim() || !addCat.trim()) {
         let warning: HTMLElement | null | any = document.getElementById(
           'warning2'
@@ -96,6 +95,7 @@ export const AddTodoTaskWindow = () => {
           <option value="medium">medium</option>
           <option value="high">high</option>
         </select>
+        <h3>Category:</h3>
         <select onChange={addCategory} className="priority_select">
           <option>none</option>
           {newcategory.map((todo: { title: string; id: number }) => (

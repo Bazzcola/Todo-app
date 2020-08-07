@@ -107,6 +107,7 @@ export const ProviderTodoContext = (props: any) => {
   const [taskloader, setTaskloader] = useState<boolean>(true);
   const [saveTodoDesc, setSaveTodoDesc] = useState<string>('');
   const [saveTodoTitle, setSaveTodoTitle] = useState<string>('');
+
   useEffect(() => {
     const data = localStorage.getItem('list_category');
     if (data) {
@@ -129,7 +130,9 @@ export const ProviderTodoContext = (props: any) => {
     localStorage.setItem('list_todo', JSON.stringify(newtodotask));
   });
 
-  const { children } = props;
+  // const { children } = props;
+  const children = props.children;
+
   return (
     <TodoContext.Provider
       value={{

@@ -9,6 +9,7 @@ export const AddCategoryWindow = () => {
   const [value, setValue] = useState('low');
   const [addtodo, setAddtodo] = useState('');
   const { loaderCat, setLoaderCat } = useContext(TodoContext);
+
   const currentTime = () => {
     let today = new Date();
     let dateTime = dayjs(today).format('MMM D, YYYY h:mm A');

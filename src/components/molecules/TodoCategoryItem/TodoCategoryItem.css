@@ -48,6 +48,10 @@
   height: 20px;
 }
 
+.add_todo21 {
+  cursor: pointer;
+}
+
 .delete_btn {
   background: rgb(223, 243, 186);
   font-size: 12px;
@@ -56,6 +60,7 @@
   color: red;
   letter-spacing: 1px;
   cursor: pointer;
+  margin: 10px 5px 0px 5px !important;
 }
 
 .edit_todo__cat {

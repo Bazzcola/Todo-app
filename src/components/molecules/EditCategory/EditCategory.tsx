@@ -1,19 +1,17 @@
 import React, { useCallback, useContext, useState } from 'react';
 import dayjs from 'dayjs';
-import { TodoContext } from 'components/context/TodoContext';
-import { Loader } from 'components/molecules/Loader/Loader';
+import { TodoContext, Categories } from 'components/context/TodoContext';
 import 'components/molecules/EditCategory/EditCategory.css';
 
 export const EditCategory = () => {
   const { editDescValue } = useContext(TodoContext);
   const { editTitleValue } = useContext(TodoContext);
   const { newcategory, setNewcategory } = useContext(TodoContext);
-  const [editTodo, setEditTodo] = useState([editTitleValue]);
-  const [editDescription, setEditDescription] = useState([editDescValue]);
+  const [editTodo, setEditTodo] = useState(editTitleValue);
+  const [editDescription, setEditDescription] = useState(editDescValue);
   const [editCatValue, setEditCatValue] = useState('low');
   const { saveId } = useContext(TodoContext);
   const { loader, setLoader } = useContext(TodoContext);
-  const { catPriority } = useContext(TodoContext);
 
   const editTime = () => {
     let today = new Date();
@@ -25,7 +23,7 @@ export const EditCategory = () => {
     () => (e: { preventDefault: () => void }) => {
       e.preventDefault();
       setNewcategory((prevNewTodos) =>
-        prevNewTodos.map((todo: any) =>
+        prevNewTodos.map((todo: Categories) =>
           todo.id === saveId
             ? {
                 id: Math.round(Math.random() * 10000),
@@ -38,8 +36,8 @@ export const EditCategory = () => {
             : todo
         )
       );
-      setEditTodo([]);
-      setEditDescription([]);
+      setEditTodo('');
+      setEditDescription('');
       setLoader(!loader);
     },
     [newcategory, editTodo, editDescription, editTime, editCatValue]

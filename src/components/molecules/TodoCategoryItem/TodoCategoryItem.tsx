@@ -32,18 +32,6 @@ export const TodoCategoryItem = () => {
         done: !todo.done
       });
       setNewcategory(newtodos);
-      // setNewcategory(newcategory.filter((otherTodo) => otherTodo !== todo));
-      // setNewtodotask(
-      //   newtodotask.filter((item) => item.categories !== todo.title)
-      // );
-      // setTimeout(() => {
-      //   setNewtodotask(
-      //     newtodotask.filter((item) => item.categories !== todo.title)
-      //   );
-      // }, 1000);
-      // setTimeout(() => {
-      //   setNewcategory(newcategory.filter((otherTodo) => otherTodo !== todo));
-      // }, 500);
     },
     [newcategory]
   );
@@ -105,6 +93,12 @@ export const TodoCategoryItem = () => {
           index: number
         ) => (
           <div key={todo.id} className="add_todo__item">
+            <input
+              className="checkbox"
+              type="checkbox"
+              checked={todo.done}
+              onChange={doneValue(todo, index)}
+            />
             <div
               className="add_todo21"
               key={todo.id}
@@ -112,31 +106,25 @@ export const TodoCategoryItem = () => {
             >
               <p className="priority_level">Priority: {todo.priority}</p>
               <h1 className={todo.done ? 'done' : ''}>{todo.title}</h1>
-              <input
-                className="checkbox"
-                type="checkbox"
-                checked={todo.done}
-                onChange={doneValue(todo, index)}
-              />
               <h2 className={todo.done ? 'done' : ''}>{todo.description}</h2>
               <span className="create_time">{todo.date}</span>
-              <button
-                className="edit_todo__cat"
-                onClick={() =>
-                  edithideBox(
-                    todo.id,
-                    todo.description,
-                    todo.title,
-                    todo.priority
-                  )
-                }
-              >
-                Edit
-              </button>
-              <button onClick={removeTodo(todo)} className="delete_btn">
-                Delete
-              </button>
             </div>
+            <button
+              className="edit_todo__cat"
+              onClick={() =>
+                edithideBox(
+                  todo.id,
+                  todo.description,
+                  todo.title,
+                  todo.priority
+                )
+              }
+            >
+              Edit
+            </button>
+            <button onClick={removeTodo(todo)} className="delete_btn">
+              Delete
+            </button>
           </div>
         )
       )}
