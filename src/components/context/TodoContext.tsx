@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, ReactNode } from 'react';
 
 export interface Categories {
   description: string;
@@ -54,6 +54,10 @@ export interface Props {
   setSaveTodoDesc: React.Dispatch<React.SetStateAction<string>>;
 }
 
+interface ProviderProps {
+  children: ReactNode;
+}
+
 const defaultValue = {
   newcategory: [],
   newtodotask: [],
@@ -90,7 +94,7 @@ const defaultValue = {
 };
 export const TodoContext = React.createContext<Props>(defaultValue);
 
-export const ProviderTodoContext = (props: any) => {
+export const ProviderTodoContext = (props: ProviderProps) => {
   const [catPriority, setCatPriority] = useState<string>('');
   const [editLoader, setEditLoader] = useState<boolean>(true);
   const [newcategory, setNewcategory] = useState<Categories[]>([]);
@@ -130,7 +134,6 @@ export const ProviderTodoContext = (props: any) => {
     localStorage.setItem('list_todo', JSON.stringify(newtodotask));
   });
 
-  // const { children } = props;
   const children = props.children;
 
   return (
