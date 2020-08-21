@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useState } from 'react';
 import dayjs from 'dayjs';
 import { TodoContext, Categories } from 'components/context/TodoContext';
 import 'components/molecules/EditCategory/EditCategory.css';
-
+/* eslint-disable */
 export const EditCategory = () => {
   const { editDescValue } = useContext(TodoContext);
   const { editTitleValue } = useContext(TodoContext);

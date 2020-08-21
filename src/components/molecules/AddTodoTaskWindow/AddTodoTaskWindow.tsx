@@ -2,7 +2,7 @@ import React, { useContext, useCallback, useState } from 'react';
 import dayjs from 'dayjs';
 import { TodoContext } from 'components/context/TodoContext';
 import 'components/molecules/AddTodoTaskWindow/AddTodoTaskWindow.css';
-
+/* eslint-disable */
 export const AddTodoTaskWindow = () => {
   const { newcategory, newtodotask, setNewtodotask } = useContext(TodoContext);
   const [descriptionTodo, setDescriptionTodo] = useState('');

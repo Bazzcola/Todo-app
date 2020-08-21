@@ -2,7 +2,7 @@ import React, { useContext, useCallback } from 'react';
 import { TodoContext } from 'components/context/TodoContext';
 import { EditTodo } from '../EditTodo/EditTodo';
 import 'components/molecules/TodoTaskItem/TodoTaskItem.css';
-
+/* eslint-disable */
 export const TodoTaskItem = () => {
   const { newtodotask, setNewtodotask } = useContext(TodoContext);
   const { newfiltertodotask } = useContext(TodoContext);

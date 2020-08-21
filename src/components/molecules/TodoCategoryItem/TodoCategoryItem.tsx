@@ -2,7 +2,7 @@ import React, { useContext, useCallback, useEffect } from 'react';
 import { TodoContext } from 'components/context/TodoContext';
 import { EditCategory } from 'components/molecules/EditCategory/EditCategory';
 import 'components/molecules/TodoCategoryItem/TodoCategoryItem.css';
-
+/* eslint-disable */
 export const TodoCategoryItem = () => {
   const { newcategory, setNewcategory } = useContext(TodoContext);
   const { newtodotask, setNewtodotask } = useContext(TodoContext);

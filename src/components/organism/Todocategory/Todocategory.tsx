@@ -3,7 +3,7 @@ import { TodoCategoryItem } from 'components/molecules/TodoCategoryItem/TodoCate
 import { TodoContext } from 'components/context/TodoContext';
 import { AddCategoryWindow } from 'components/molecules/AddCategoryWindow/AddCategoryWindow';
 import 'components/organism/Todocategory/Todocategory.css';
-
+/* eslint-disable */
 export const Todocategory = () => {
   const { newcategory, setNewcategory } = useContext(TodoContext);
   const { loaderCat, setLoaderCat } = useContext(TodoContext);

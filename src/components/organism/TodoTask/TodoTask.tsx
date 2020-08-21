@@ -3,7 +3,7 @@ import { TodoContext } from 'components/context/TodoContext';
 import { TodoTaskItem } from 'components/molecules/TodoTaskItem/TodoTaskItem';
 import { AddTodoTaskWindow } from 'components/molecules/AddTodoTaskWindow/AddTodoTaskWindow';
 import 'components/organism/TodoTask/TodoTask.css';
-
+/* eslint-disable */
 export const TodoTask = () => {
   const { newtodotask, setNewtodotask } = useContext(TodoContext);
   const { taskloader, setTaskloader } = useContext(TodoContext);

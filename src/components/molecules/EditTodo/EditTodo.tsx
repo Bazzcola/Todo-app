@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useState } from 'react';
 import dayjs from 'dayjs';
 import { TodoContext, Todo } from 'components/context/TodoContext';
 import 'components/molecules/EditTodo/EditTodo.css';
-
+/* eslint-disable */
 export const EditTodo = () => {
   const { saveTodoTitle } = useContext(TodoContext);
   const { saveTodoDesc } = useContext(TodoContext);

@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useState } from 'react';
 import dayjs from 'dayjs';
 import { TodoContext } from 'components/context/TodoContext';
 import 'components/molecules/AddCategoryWindow/AddCategoryWindow.css';
-
+/* eslint-disable */
 export const AddCategoryWindow = () => {
   const { newcategory, setNewcategory } = useContext(TodoContext);
   const [description, setDescription] = useState('');
