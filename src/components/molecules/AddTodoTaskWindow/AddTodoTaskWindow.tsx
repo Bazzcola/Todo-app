@@ -89,22 +89,28 @@ export const AddTodoTaskWindow = () => {
         <p id="warning2" style={{ display: 'none' }} className="warning2">
           Fill all fields
         </p>
-        <h3>Priority level:</h3>
-        <select onChange={addValue} className="priority_select">
-          <option value="low">low</option>
-          <option value="medium">medium</option>
-          <option value="high">high</option>
-        </select>
-        <h3>Category:</h3>
-        <select onChange={addCategory} className="priority_select">
-          <option>none</option>
-          {newcategory.map((todo: { title: string; id: number }) => (
-            <option value={todo.title} key={todo.id}>
-              {todo.title}
-            </option>
-          ))}
-        </select>
-        <br />
+        <div className="select_box">
+          <div className="select_box_item1">
+            <h3>Priority level:</h3>
+            <select onChange={addValue} className="priority_select">
+              <option value="low">low</option>
+              <option value="medium">medium</option>
+              <option value="high">high</option>
+            </select>
+          </div>
+          <div className="select_box_item1">
+            <h3>Category:</h3>
+            <select onChange={addCategory} className="priority_select">
+              <option>none</option>
+              {newcategory.map((todo: { title: string; id: number }) => (
+                <option value={todo.title} key={todo.id}>
+                  {todo.title}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
         <input
           type="text"
           onChange={setTodo}

@@ -19,6 +19,11 @@
   font-weight: 700;
 }
 
+.select_box {
+  display: flex;
+  justify-content: center;
+}
+
 .form_box_todo span {
   position: absolute;
   right: 20px;
